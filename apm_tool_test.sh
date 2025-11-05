@@ -14,7 +14,7 @@ APP_PIDS=()
 COLLECTOR_PIDS=()
 
 cleanup() {
-	echo "Cleaning up..."
+
 	if ((${#COLLECTOR_PIDS[@]})); then
 		for cpid in "${COLLECTOR_PIDS[@]}"; do
 			kill "$cpid" 2>/dev/null || true
@@ -24,7 +24,7 @@ cleanup() {
  	if ((${#APP_PIDS[@]})); then
 		for pid in "${APP_PIDS[@]}"; do
 			if kill -0 "$pid" 2>/dev/null; then
-				echo "Killing app PID $pid"
+				echo "Killing $pid"
 				kill "$pid" 2>/dev/null || true
 			fi
 		done
@@ -32,7 +32,7 @@ cleanup() {
 
 
 	pkill -P $$ 2>/dev/null || true
-	echo "All processes terminated."
+
 }
 trap cleanup EXIT
 
@@ -126,7 +126,7 @@ collect_process_metrics() {
 	done
 }
 
-echo "Starting APM tool..."
+
 spawn_apps
 collect_system_metrics &
 COLLECTOR_PIDS+=("$!")

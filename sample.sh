@@ -17,7 +17,7 @@ APP_PIDS=()
 COLLECTOR_PIDS=()
 
 cleanup() {
-    echo "Cleaning up..."
+
     # kill per-process collectors
     if ((${#COLLECTOR_PIDS[@]})); then
         for cpid in "${COLLECTOR_PIDS[@]}"; do
@@ -29,7 +29,7 @@ cleanup() {
     if ((${#APP_PIDS[@]})); then
         for pid in "${APP_PIDS[@]}"; do
             if [ "$pid" -gt 1 ] && kill -0 "$pid" 2>/dev/null; then
-                echo "Killing app PID $pid"
+                echo "Killing $pid"
                 kill "$pid" 2>/dev/null || true
             fi
         done
@@ -37,7 +37,7 @@ cleanup() {
 
     # last resort – kill children of this script
     pkill -P $$ 2>/dev/null || true
-    echo "All processes terminated."
+
 }
 trap cleanup EXIT
 
@@ -50,7 +50,7 @@ resolve_app_pid() {
 }
 
 spawn_apps() {
-    echo "Launching applications..."
+    echo "Launching applications:"
     APP_PIDS=()
     for app in "${APPS[@]}"; do
         local app_path="$APP_DIR/$app"
@@ -63,7 +63,7 @@ spawn_apps() {
                 APP_PIDS+=("$real_pid")
                 echo "$app running as PID $real_pid"
             else
-                echo "WARNING: could not resolve PID for $app" >&2
+                echo "could not resolve PID for $app" >&2
             fi
         else
             echo "ERROR: $app_path not found or not executable" >&2
@@ -139,7 +139,6 @@ collect_process_metrics() {
     done
 }
 
-echo "Starting APM tool..."
 spawn_apps
 collect_system_metrics &
 COLLECTOR_PIDS+=("$!")
