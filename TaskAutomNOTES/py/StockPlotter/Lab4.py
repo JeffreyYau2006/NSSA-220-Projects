@@ -1,0 +1,9 @@
+# notes, don't use your own data use data supplied by lab
+# crapy library, project 2 i don't think we're using?
+from scapy import *
+packets = rpcap('example.pcap')
+print(packets)
+print(packets[1])
+len(packets)
+p0=packets[0]
+len(p0[Ether]), len(p0[IP]), len(p0[ICMP]) # size of each object
