@@ -2,7 +2,7 @@ lst = [ [5.1, 3.5, 1.4, 0.2, 'Iris-setosa'], [7.0, 3.2] ]
 strSplit=''
 lst1 = []
 # reading
-f = open('iris.txt', 'r')
+f = open('./NSSA-220-Projects/TaskAutomNotes/py/iris.txt', 'r')
 
 # first line
 line = f.readline().strip(" ")
@@ -19,7 +19,7 @@ for i in line:
 f.close
 
 print(lst1)
-a = open('new_iris.txt', 'w')
+a = open('./NSSA-220-Projects/TaskAutomNotes/py/new_iris.txt', 'w')
 
 count1=0
 
