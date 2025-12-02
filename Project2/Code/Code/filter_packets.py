@@ -28,7 +28,14 @@ def filter():
 			#print(srcIP)
 			dstIP = lineParts[3] 
 			#print(dstIP)
-			lengthByte = int(lineParts[5]) # UNDER LENGTH
+			lengthByte = int(lineParts[5]) # UNDER "LENGTH"
+
+			if "seq=" in line:
+				seq = lineParts[10]
+				print(seq)
+			else:
+				line = f.readline().strip(" ")
+				continue
 
 			dataByte = lengthByte - 42 # 42 because of Ethernet Header (14 bytes) + IPv4 (20 bytes) + ICMP Type 8 (8 bytes) = 42
 			# above info is taken from wireshark, says the info under each of the header.
