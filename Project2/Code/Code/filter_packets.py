@@ -30,6 +30,7 @@ def filter():
 			#print(dstIP)
 			lengthByte = int(lineParts[5]) # UNDER "LENGTH"
 
+			time = float(lineParts[1])
 			if "seq=" in line:
 				seq = lineParts[10]
 				print(seq)
@@ -38,7 +39,7 @@ def filter():
 				continue
 
 			dataByte = lengthByte - 42 # 42 because of Ethernet Header (14 bytes) + IPv4 (20 bytes) + ICMP Type 8 (8 bytes) = 42
-			# above info is taken from wireshark, says the info under each of the header.
+			# above info is taken from wireshark pcap if you want to look, says the info under each of the header.
 
 			if "Echo (ping) request" in line and srcIP == "192.168.100.1": # if request is in the line and source ip is 100.1, since 100.1 is source sending, counter for sent +1
 				ICMPcounterRequestSent = ICMPcounterRequestSent + 1
@@ -66,7 +67,7 @@ def filter():
 	print("Replies Received:", ICMPcounterReplyReceive)
 
 	print("Echo Request Bytes Sent:", requestBytesSent)
-	print("Echo Request Bytes Received:", requestBytesReceived)      # ← ADDED OUTPUT
+	print("Echo Request Bytes Received:", requestBytesReceived)      
 	print("Echo Request Data Sent:", requestDataSent)
 	print("Echo Request Data Received:", requestDataReceived)    
 	f.close()

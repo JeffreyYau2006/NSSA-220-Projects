@@ -1,0 +1,59 @@
+﻿Node 1
+
+Echo Requests Sent,Echo Requests Received,Echo Replies Sent,Echo Replies Received
+num,num,num,num
+Echo Request Bytes Sent (bytes),Echo Request Data Sent (bytes)
+num,num
+Echo Request Bytes Received (bytes),Echo Request Data Received (bytes)
+num,num
+
+Average RTT (milliseconds),num
+Echo Request Throughput (kB/sec),num
+Echo Request Goodput (kB/sec),num
+Average Reply Delay (microseconds),num
+Average Echo Request Hop Count,num
+
+Node 2
+
+Echo Requests Sent,Echo Requests Received,Echo Replies Sent,Echo Replies Received
+num,num,num,num
+Echo Request Bytes Sent (bytes),Echo Request Data Sent (bytes)
+num,num
+Echo Request Bytes Received (bytes),Echo Request Data Received (bytes)
+num,num
+
+Average RTT (milliseconds),num
+Echo Request Throughput (kB/sec),num
+Echo Request Goodput (kB/sec),num
+Average Reply Delay (microseconds),num
+Average Echo Request Hop Count,num
+
+Node 3
+
+Echo Requests Sent,Echo Requests Received,Echo Replies Sent,Echo Replies Received
+num,num,num,num
+Echo Request Bytes Sent (bytes),Echo Request Data Sent (bytes)
+num,num
+Echo Request Bytes Received (bytes),Echo Request Data Received (bytes)
+num,num
+
+Average RTT (milliseconds),num
+Echo Request Throughput (kB/sec),num
+Echo Request Goodput (kB/sec),num
+Average Reply Delay (microseconds),num
+Average Echo Request Hop Count,num
+
+Node 4
+
+Echo Requests Sent,Echo Requests Received,Echo Replies Sent,Echo Replies Received
+num,num,num,num
+Echo Request Bytes Sent (bytes),Echo Request Data Sent (bytes)
+num,num
+Echo Request Bytes Received (bytes),Echo Request Data Received (bytes)
+num,num
+
+Average RTT (milliseconds),num
+Echo Request Throughput (kB/sec),num
+Echo Request Goodput (kB/sec),num
+Average Reply Delay (microseconds),num
+Average Echo Request Hop Count,num
