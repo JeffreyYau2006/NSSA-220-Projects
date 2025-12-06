@@ -11,10 +11,13 @@ def parse():
                 src_ip = parts[2]
                 dst_ip = parts[3]
                 frame_len = int(parts[5])
-                if "request" in line:
+                if "Echo (ping) request" in line:
                     icmp_type = 8
-                else:
+                elif "Echo (ping) reply" in line:
                     icmp_type = 0
+                else:
+                    line = f.readline()
+                    continue
                 icmp_id = 0
                 icmp_seq = 0
                 ip_ttl = 0
@@ -33,7 +36,6 @@ def parse():
                         val = p.split("=", 1)[1].rstrip(",)")
                         ip_ttl = int(val)
                 icmp_payload_len = max(0, frame_len - 42)
-
                 pkt = {
                     "timestamp": timestamp,
                     "src_ip": src_ip,
