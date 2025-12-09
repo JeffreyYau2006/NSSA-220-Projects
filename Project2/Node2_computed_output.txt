@@ -1,0 +1,13 @@
+Echo Requests Sent: 70
+Echo Requests Received: 28
+Echo Replies Sent: 28
+Echo Replies Received: 70
+Echo Request Bytes Sent: 58672
+Echo Request Bytes Received: 30008
+Echo Request Data Sent: 55732
+Echo Request Data Received: 28832
+Average RTT (ms): 0.05
+Echo Request Throughput (kB/sec): 0.1
+Echo Request Goodput (kB/sec): 0.1
+Average Reply Delay (us): 52.73
+{'number': '1483', 'time': 1307.499263, 'srcIP': '192.168.100.1', 'dstIP': '192.168.100.2', 'length': 942, 'dataBytes': 900, 'icmpType': 'reply', 'seq': '255'}
