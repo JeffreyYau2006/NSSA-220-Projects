@@ -1,21 +1,20 @@
 import packet_parser 
 
 def compute(node):
-    # Counters
-    ICMPcounterRequestSent = 0
-    ICMPcounterRequestReceive = 0
-    ICMPcounterReplySent = 0
-    ICMPcounterReplyReceive = 0
+    ICMPcounterRequestSent = 0 # number of echo requests sent
+    ICMPcounterRequestReceive = 0 # number of echo requests received
+    ICMPcounterReplySent = 0 #  number of echo replies sent
+    ICMPcounterReplyReceive = 0 # number of echo replies received
 
-    requestBytesSent = 0
-    requestBytesReceived = 0
-    requestDataSent = 0
-    requestDataReceived = 0
+    requestBytesSent = 0 # total bytes of requests sents
+    requestBytesReceived = 0 # total bytes of requests received
+    requestDataSent = 0 # total payload bytes sent
+    requestDataReceived = 0 # total payload bytes received
 
     request_times = {}  # key: seq, value: time sent
-    rtt_total = 0
-    rtt_count = 0
-    reply_delays = []
+    rtt_total = 0 # sum of rtt values
+    rtt_count = 0 # number of rtt samples
+    reply_delays = [] # list of individual reply delays
 
     # For average reply delay (time request -> reply received by 192.168.100.1)
     reply_delays = []
@@ -27,7 +26,7 @@ def compute(node):
     while line:
         line = line.strip(" ")
 
-        parsed = packet_parser.parse(line)
+        parsed = packet_parser.parse(line) # parse packet line with packet_parser
 
         if parsed != None:
 
@@ -74,26 +73,29 @@ def compute(node):
     # Metrics calculations
     avg_rtt = rtt_total / rtt_count if rtt_count > 0 else 0
 
-    total_time = 0
+    total_time = 0 # total measurement duration based on request timestamps
     if request_times:
         total_time = max(request_times.values()) - min(request_times.values())
 
-    throughput_kB = requestBytesSent / 1024 / total_time
-    goodput_kB = requestDataSent / 1024 / total_time
-    avg_reply_delay_us = sum(reply_delays) / len(reply_delays) if reply_delays else 0
-    print("Echo Requests Sent", ICMPcounterRequestSent)
-    print("Echo Requests Received", ICMPcounterRequestReceive)
-    print("Echo Replies Sent", ICMPcounterReplySent)
-    print("Echo Replies Received", ICMPcounterReplyReceive)
+    throughput_kB = requestBytesSent / 1024 / total_time # thoroughput in kilobytes per second
+    goodput_kB = requestDataSent / 1024 / total_time # goodput in kilobytes per second
+    avg_reply_delay_us = sum(reply_delays) / len(reply_delays) if reply_delays else 0 # average reply delay in microseconds
 
-    print("Echo Request Bytes Sent", requestBytesSent)
-    print("Echo Request Bytes Received", requestBytesReceived)
-    print("Echo Request Data Sent", requestDataSent)
-    print("Echo Request Data Received", requestDataReceived)
+    outputFile = "Node" + str(node) + "_computed_output.txt"
+    computeOutputFile = open(outputFile, 'w')
+    computeOutputFile.write(f"Echo Requests Sent: {ICMPcounterRequestSent}\n")
+    computeOutputFile.write(f"Echo Requests Received: {ICMPcounterRequestReceive}\n")
+    computeOutputFile.write(f"Echo Replies Sent: {ICMPcounterReplySent}\n")
+    computeOutputFile.write(f"Echo Replies Received: {ICMPcounterReplyReceive}\n")
 
-    print(f"Average RTT (ms): {avg_rtt:.2f}")
-    print(f"Echo Request Throughput (kB/sec): {throughput_kB:.1f}")
-    print(f"Echo Request Goodput (kB/sec): {goodput_kB:.1f}")
-    print(f"Average Reply Delay (us): {avg_reply_delay_us:.2f}")
-    print(parsed)
+    computeOutputFile.write(f"Echo Request Bytes Sent: {requestBytesSent}\n")
+    computeOutputFile.write(f"Echo Request Bytes Received: {requestBytesReceived}\n")
+    computeOutputFile.write(f"Echo Request Data Sent: {requestDataSent}\n")
+    computeOutputFile.write(f"Echo Request Data Received: {requestDataReceived}\n")
+
+    computeOutputFile.write(f"Average RTT (ms): {avg_rtt:.2f}\n")
+    computeOutputFile.write(f"Echo Request Throughput (kB/sec): {throughput_kB:.1f}\n")
+    computeOutputFile.write(f"Echo Request Goodput (kB/sec): {goodput_kB:.1f}\n")
+    computeOutputFile.write(f"Average Reply Delay (us): {avg_reply_delay_us:.2f}\n")
+    computeOutputFile.write(f"{parsed}\n")
 compute(1)
