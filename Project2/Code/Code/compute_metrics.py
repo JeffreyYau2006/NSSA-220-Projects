@@ -2,35 +2,35 @@ import packet_parser
 
 def compute(node):
     # Counters
-    ICMPcounterRequestSent = 0
-    ICMPcounterRequestReceive = 0
-    ICMPcounterReplySent = 0
-    ICMPcounterReplyReceive = 0
+    ICMPcounterRequestSent = 0 # number of echo requests sent
+    ICMPcounterRequestReceive = 0 # number of echo requests received
+    ICMPcounterReplySent = 0 #  number of echo replies sent
+    ICMPcounterReplyReceive = 0 # number of echo replies received
 
-    requestBytesSent = 0
-    requestBytesReceived = 0
-    requestDataSent = 0
-    requestDataReceived = 0
+    requestBytesSent = 0 # total bytes of requests sents
+    requestBytesReceived = 0 # total bytes of requests received
+    requestDataSent = 0 # total payload bytes sent
+    requestDataReceived = 0 # total payload bytes received
 
     request_times = {}  # key: seq, value: time sent
-    rtt_total = 0
-    rtt_count = 0
-    reply_delays = []
+    rtt_total = 0 # sum of rtt values
+    rtt_count = 0 # number of rtt samples
+    reply_delays = [] # list of individual reply delays
 
     # For average reply delay (time request -> reply received by 192.168.100.1)
     reply_delays = []
 
     fInputFile = "./" + "Node" + str(node) + "_filtered_output.txt"
-    f = open(fInputFile, 'r')                    
-    line = f.readline()
+    f = open(fInputFile, 'r') # open file for reading                  
+    line = f.readline() # read first line
 
     while line:
-        line = line.strip(" ")
+        line = line.strip(" ") 
 
-        parsed = packet_parser.parse(line)
+        parsed = packet_parser.parse(line) # parse packet line with packet_parser
 
         if parsed != None:
-
+            # extract parsed fields
             srcIP = parsed["srcIP"]
             dstIP = parsed["dstIP"]
             length = parsed["length"]
@@ -54,11 +54,11 @@ def compute(node):
                 requestDataReceived += dataBytes
 
             # Reply sent
-            if icmpType == "reply" and srcIP == "192.168.100.1": 
+            if icmpType == "reply" and srcIP == "192.168.100.1":  # if this node sent a reply
                 ICMPcounterReplySent += 1
 
             # Reply received
-            if icmpType == "reply" and dstIP == "192.168.100.1":
+            if icmpType == "reply" and dstIP == "192.168.100.1": # if this node received a reply
                 ICMPcounterReplyReceive += 1
 
                 # rtt calculation
@@ -68,19 +68,19 @@ def compute(node):
                     rtt_count += 1
                     reply_delays.append(rtt * 1000)  # store in microseconds
 
-        line = f.readline()
+        line = f.readline() # read next packet line
 
     f.close()
     # Metrics calculations
-    avg_rtt = rtt_total / rtt_count if rtt_count > 0 else 0
+    avg_rtt = rtt_total / rtt_count if rtt_count > 0 else 0 # average rtt in milliseconds
 
-    total_time = 0
+    total_time = 0 # total measurement duration based on request timestamps
     if request_times:
         total_time = max(request_times.values()) - min(request_times.values())
 
-    throughput_kB = requestBytesSent / 1024 / total_time
-    goodput_kB = requestDataSent / 1024 / total_time
-    avg_reply_delay_us = sum(reply_delays) / len(reply_delays) if reply_delays else 0
+    throughput_kB = requestBytesSent / 1024 / total_time # thoroughput in kilobytes per second
+    goodput_kB = requestDataSent / 1024 / total_time # goodput in kilobytes per second
+    avg_reply_delay_us = sum(reply_delays) / len(reply_delays) if reply_delays else 0 # average reply delay in microseconds
     print("Echo Requests Sent", ICMPcounterRequestSent)
     print("Echo Requests Received", ICMPcounterRequestReceive)
     print("Echo Replies Sent", ICMPcounterReplySent)
@@ -96,4 +96,4 @@ def compute(node):
     print(f"Echo Request Goodput (kB/sec): {goodput_kB:.1f}")
     print(f"Average Reply Delay (us): {avg_reply_delay_us:.2f}")
     print(parsed)
-compute(1)
+compute(1) # run computation for node 1
