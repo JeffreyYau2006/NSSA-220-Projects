@@ -1,4 +1,4 @@
-def filter():
+def OLD_FILTER_filter():
 	ICMPcounterRequestSent = 0
 	ICMPcounterRequestReceive = 0
 	ICMPcounterReplySent = 0
@@ -72,4 +72,4 @@ def filter():
 	print("Echo Request Data Received:", requestDataReceived)    
 	f.close()
 	
-filter()
+OLD_FILTER_filter()
