@@ -1,6 +1,9 @@
-def filter():
-    f = open('./NSSA-220-Projects/Project2/Captures/Captures/Node1.txt', 'r')
-    out = open('./filtered_output.txt', 'w')
+def filter(node):
+    fInputFile = './../NSSA-220-Projects/Project2/Captures/Captures/' + "Node" + str(node) + ".txt"
+    f = open(fInputFile, 'r')
+
+    outputFile = "Node" + str(node) + "_filtered_output.txt"
+    out = open(outputFile, 'w')
 
     line = f.readline()
 
@@ -17,4 +20,4 @@ def filter():
 
     f.close()
     out.close()
-filter()
+filter(1)

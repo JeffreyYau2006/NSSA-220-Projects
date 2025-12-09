@@ -1,6 +1,6 @@
 import packet_parser 
 
-def compute():
+def compute(node):
     # Counters
     ICMPcounterRequestSent = 0
     ICMPcounterRequestReceive = 0
@@ -20,7 +20,8 @@ def compute():
     # For average reply delay (time request -> reply received by 192.168.100.1)
     reply_delays = []
 
-    f = open("./../filtered_output.txt", "r")
+    fInputFile = "./" + "Node" + str(node) + "_filtered_output.txt"
+    f = open(fInputFile, 'r')                    
     line = f.readline()
 
     while line:
@@ -95,4 +96,4 @@ def compute():
     print(f"Echo Request Goodput (kB/sec): {goodput_kB:.1f}")
     print(f"Average Reply Delay (us): {avg_reply_delay_us:.2f}")
     print(parsed)
-compute()
+compute(1)
