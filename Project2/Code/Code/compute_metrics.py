@@ -90,8 +90,9 @@ def compute(node):
     goodput_kB = requestDataSent / 1024 / total_time # goodput in kilobytes per second
     avg_reply_delay_us = sum(reply_delays) / len(reply_delays) if reply_delays else 0 # average reply delay in microseconds
 
-    outputFile = "Node" + str(node) + "_computed_output.txt"
+    outputFile = "computed_output.txt"
     computeOutputFile = open(outputFile, 'w')
+    computeOutputFile.write(f"Node{node}\n")
     computeOutputFile.write(f"Echo Requests Sent: {ICMPcounterRequestSent}\n")
     computeOutputFile.write(f"Echo Requests Received: {ICMPcounterRequestReceive}\n")
     computeOutputFile.write(f"Echo Replies Sent: {ICMPcounterReplySent}\n")
@@ -106,5 +107,5 @@ def compute(node):
     computeOutputFile.write(f"Echo Request Throughput (kB/sec): {throughput_kB:.1f}\n")
     computeOutputFile.write(f"Echo Request Goodput (kB/sec): {goodput_kB:.1f}\n")
     computeOutputFile.write(f"Average Reply Delay (us): {avg_reply_delay_us:.2f}\n")
-    computeOutputFile.write(f"{parsed}\n")
+   # computeOutputFile.write(f"{parsed}\n")
 compute(1)

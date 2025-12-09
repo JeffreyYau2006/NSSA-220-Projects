@@ -1,0 +1,52 @@
+Node1
+Echo Requests Sent: 128
+Echo Requests Received: 49
+Echo Replies Sent: 49
+Echo Replies Received: 128
+Echo Request Bytes Sent: 89452
+Echo Request Bytes Received: 51904
+Echo Request Data Sent: 84076
+Echo Request Data Received: 49846
+Average RTT (ms): 2.56
+Echo Request Throughput (kB/sec): 0.1
+Echo Request Goodput (kB/sec): 0.1
+Average Reply Delay (us): 2564.85
+Node2
+Echo Requests Sent: 70
+Echo Requests Received: 28
+Echo Replies Sent: 28
+Echo Replies Received: 70
+Echo Request Bytes Sent: 58672
+Echo Request Bytes Received: 30008
+Echo Request Data Sent: 55732
+Echo Request Data Received: 28832
+Average RTT (ms): 0.05
+Echo Request Throughput (kB/sec): 0.1
+Echo Request Goodput (kB/sec): 0.1
+Average Reply Delay (us): 52.73
+Node3
+Echo Requests Sent: 18
+Echo Requests Received: 17
+Echo Replies Sent: 17
+Echo Replies Received: 18
+Echo Request Bytes Sent: 17788
+Echo Request Bytes Received: 19896
+Echo Request Data Sent: 17032
+Echo Request Data Received: 19182
+Average RTT (ms): 0.06
+Echo Request Throughput (kB/sec): 0.0
+Echo Request Goodput (kB/sec): 0.0
+Average Reply Delay (us): 57.56
+Node4
+Echo Requests Sent: 40
+Echo Requests Received: 4
+Echo Replies Sent: 4
+Echo Replies Received: 40
+Echo Request Bytes Sent: 12992
+Echo Request Bytes Received: 2000
+Echo Request Data Sent: 11312
+Echo Request Data Received: 1832
+Average RTT (ms): 0.05
+Echo Request Throughput (kB/sec): 0.0
+Echo Request Goodput (kB/sec): 0.0
+Average Reply Delay (us): 50.20
