@@ -4,4 +4,4 @@ from compute_metrics import *
 
 filter(1)
 parse()
-compute()
+compute(1)
